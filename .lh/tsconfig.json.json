@@ -1,0 +1,26 @@
+{
+    "sourceFile": "tsconfig.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1777128015584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1777128020928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n {\r\n   \"compilerOptions\": {\r\n-  \"target\": \"ES2020\",\r\n-  \"module\": \"commonjs\",\r\n-  \"lib\": [\"ES2020\"],\r\n-  \"types\": [\"node\"],\r\n+    \"target\": \"ES2020\",\r\n+    \"module\": \"commonjs\",\r\n+    \"lib\": [\"ES2020\"],\r\n     \"outDir\": \"./dist\",\r\n     \"rootDir\": \"./src\",\r\n     \"strict\": true,\r\n     \"esModuleInterop\": true,\r\n"
+                },
+                {
+                    "date": 1777128036679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n   \"compilerOptions\": {\r\n     \"target\": \"ES2020\",\r\n     \"module\": \"commonjs\",\r\n     \"lib\": [\"ES2020\"],\r\n+    \r\n     \"outDir\": \"./dist\",\r\n     \"rootDir\": \"./src\",\r\n     \"strict\": true,\r\n     \"esModuleInterop\": true,\r\n"
+                }
+            ],
+            "date": 1777128015584,
+            "name": "Commit-0",
+            "content": "{\r\n  \"compilerOptions\": {\r\n  \"target\": \"ES2020\",\r\n  \"module\": \"commonjs\",\r\n  \"lib\": [\"ES2020\"],\r\n  \"types\": [\"node\"],\r\n    \"outDir\": \"./dist\",\r\n    \"rootDir\": \"./src\",\r\n    \"strict\": true,\r\n    \"esModuleInterop\": true,\r\n    \"skipLibCheck\": true,\r\n    \"forceConsistentCasingInFileNames\": true,\r\n    \"resolveJsonModule\": true\r\n  },\r\n  \"include\": [\"src/**/*\"],\r\n  \"exclude\": [\"node_modules\"]\r\n}"
+        }
+    ]
+}

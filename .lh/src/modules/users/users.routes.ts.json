@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/users/users.routes.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777124634673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777124634673,
+            "name": "Commit-0",
+            "content": "import { Router } from 'express'\r\nimport {\r\n  getAll,\r\n  getMe,\r\n  getById,\r\n  updateMe,\r\n  update,\r\n  deactivate,\r\n  listTechnicians,\r\n} from './users.controller'\r\nimport { authenticate } from '../../middleware/authenticate'\r\nimport { authorize } from '../../middleware/authorize'\r\n\r\nconst router = Router()\r\n\r\nrouter.use(authenticate)\r\n\r\n// Own profile — any logged in user\r\nrouter.get('/me', getMe)\r\nrouter.patch('/me', updateMe)\r\n\r\n// Technician list — managers and vendor_admin for ticket assignment\r\nrouter.get('/technicians', authorize('vendor_admin', 'manager'), listTechnicians)\r\n\r\n// Admin operations\r\nrouter.get('/', authorize('vendor_admin', 'manager', 'hospital_admin'), getAll)\r\nrouter.get('/:id', authorize('vendor_admin', 'manager', 'hospital_admin'), getById)\r\nrouter.patch('/:id', authorize('vendor_admin', 'manager'), update)\r\nrouter.delete('/:id', authorize('vendor_admin'), deactivate)\r\n\r\nexport default router"
+        }
+    ]
+}

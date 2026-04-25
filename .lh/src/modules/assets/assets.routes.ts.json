@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/assets/assets.routes.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777125087768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777125087768,
+            "name": "Commit-0",
+            "content": "import { Router } from 'express'\r\nimport {\r\n  getModels,\r\n  createModel,\r\n  getAll,\r\n  getById,\r\n  create,\r\n  update,\r\n  remove,\r\n} from './assets.controller'\r\nimport { authenticate } from '../../middleware/authenticate'\r\nimport { authorize } from '../../middleware/authorize'\r\n\r\nconst router = Router()\r\n\r\nrouter.use(authenticate)\r\n\r\n// Asset models — the bed product catalog\r\nrouter.get('/models', getModels)\r\nrouter.post('/models', authorize('vendor_admin'), createModel)\r\n\r\n// Individual physical beds\r\nrouter.get('/', getAll)\r\nrouter.get('/:id', getById)\r\nrouter.post('/', authorize('vendor_admin', 'manager', 'hospital_admin'), create)\r\nrouter.patch('/:id', authorize('vendor_admin', 'manager', 'hospital_admin'), update)\r\nrouter.delete('/:id', authorize('vendor_admin'), remove)\r\n\r\nexport default router"
+        }
+    ]
+}

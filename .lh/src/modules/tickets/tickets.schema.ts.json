@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/tickets/tickets.schema.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777127330936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777127330935,
+            "name": "Commit-0",
+            "content": "import { z } from 'zod'\r\n\r\nexport const createTicketSchema = z.object({\r\n  assetId: z.string().min(1, 'Asset ID is required'),\r\n  title: z.string().min(1, 'Title is required'),\r\n  description: z.string().min(1, 'Description is required'),\r\n  priority: z.enum(['low', 'medium', 'high', 'critical']).default('medium'),\r\n  category: z.enum([\r\n    'mechanical',\r\n    'electrical',\r\n    'software',\r\n    'preventive_maintenance',\r\n    'other',\r\n  ]).default('other'),\r\n})\r\n\r\nexport const updateTicketStatusSchema = z.object({\r\n  status: z.enum([\r\n    'open',\r\n    'acknowledged',\r\n    'in_progress',\r\n    'pending_parts',\r\n    'resolved',\r\n    'closed',\r\n    'cancelled',\r\n  ]),\r\n  note: z.string().optional(),\r\n})\r\n\r\nexport const assignTicketSchema = z.object({\r\n  technicianId: z.string().min(1, 'Technician ID is required'),\r\n  eta: z.string().datetime().optional(),\r\n})\r\n\r\nexport const addCommentSchema = z.object({\r\n  body: z.string().min(1, 'Comment cannot be empty'),\r\n  isInternal: z.boolean().default(false),\r\n})\r\n\r\nexport const createServiceReportSchema = z.object({\r\n  diagnosis: z.string().min(1, 'Diagnosis is required'),\r\n  workPerformed: z.string().min(1, 'Work performed is required'),\r\n  rootCause: z.enum([\r\n    'hardware_failure',\r\n    'user_error',\r\n    'software_bug',\r\n    'wear_and_tear',\r\n    'other',\r\n  ]),\r\n  visitStart: z.string().datetime(),\r\n  visitEnd: z.string().datetime(),\r\n  laborMinutes: z.number().int().min(0).default(0),\r\n  requiresFollowup: z.boolean().default(false),\r\n  followupNotes: z.string().optional(),\r\n  partsUsed: z.array(z.object({\r\n    partNumber: z.string().optional(),\r\n    partName: z.string().min(1),\r\n    quantity: z.number().int().min(1),\r\n    unitCost: z.number().min(0),\r\n    currency: z.string().default('MYR'),\r\n  })).default([]),\r\n})\r\n\r\nexport type CreateTicketInput = z.infer<typeof createTicketSchema>\r\nexport type UpdateTicketStatusInput = z.infer<typeof updateTicketStatusSchema>\r\nexport type AssignTicketInput = z.infer<typeof assignTicketSchema>\r\nexport type AddCommentInput = z.infer<typeof addCommentSchema>\r\nexport type CreateServiceReportInput = z.infer<typeof createServiceReportSchema>"
+        }
+    ]
+}

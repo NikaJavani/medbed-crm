@@ -1,0 +1,82 @@
+{
+    "sourceFile": "src/app.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1777119261820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1777123837828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import dotenv from 'dotenv'\r\n \r\n dotenv.config()\r\n \r\n-import authRoutes from './modules/auth/auth.routes'\r\n+import organizationRoutes from './modules/organizations/organizations.routes'\r\n import { errorHandler } from './middleware/errorHandler'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n"
+                },
+                {
+                    "date": 1777123850750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,30 +0,0 @@\n-import express from 'express'\r\n-import cors from 'cors'\r\n-import dotenv from 'dotenv'\r\n-\r\n-dotenv.config()\r\n-\r\n-import organizationRoutes from './modules/organizations/organizations.routes'\r\n-import { errorHandler } from './middleware/errorHandler'\r\n-\r\n-const app = express()\r\n-const PORT = process.env.PORT || 3000\r\n-\r\n-// Middleware\r\n-app.use(cors())\r\n-app.use(express.json())\r\n-\r\n-// Health check\r\n-app.get('/health', (req, res) => {\r\n-  res.json({ status: 'ok', message: 'MedBed CRM API is running' })\r\n-})\r\n-\r\n-// Routes\r\n-app.use('/api/auth', authRoutes)\r\n-\r\n-// Error handler — must be last\r\n-app.use(errorHandler)\r\n-\r\n-app.listen(PORT, () => {\r\n-  console.log(`Server running on http://localhost:${PORT}`)\r\n-})\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1777123903543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,30 @@\n+import express from 'express'\r\n+import cors from 'cors'\r\n+import dotenv from 'dotenv'\r\n+\r\n+dotenv.config()\r\n+\r\n+import authRoutes from './modules/auth/auth.routes'\r\n+import { errorHandler } from './middleware/errorHandler'\r\n+\r\n+const app = express()\r\n+const PORT = process.env.PORT || 3000\r\n+\r\n+// Middleware\r\n+app.use(cors())\r\n+app.use(express.json())\r\n+\r\n+// Health check\r\n+app.get('/health', (req, res) => {\r\n+  res.json({ status: 'ok', message: 'MedBed CRM API is running' })\r\n+})\r\n+\r\n+// Routes\r\n+app.use('/api/auth', authRoutes)\r\n+\r\n+// Error handler — must be last\r\n+app.use(errorHandler)\r\n+\r\n+app.listen(PORT, () => {\r\n+  console.log(`Server running on http://localhost:${PORT}`)\r\n+})\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1777123971803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n \r\n dotenv.config()\r\n \r\n import authRoutes from './modules/auth/auth.routes'\r\n+\r\n import { errorHandler } from './middleware/errorHandler'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n"
+                },
+                {
+                    "date": 1777123991250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \r\n dotenv.config()\r\n \r\n import authRoutes from './modules/auth/auth.routes'\r\n-\r\n+import organizationRoutes from './modules/organizations/organizations.routes'\r\n import { errorHandler } from './middleware/errorHandler'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n@@ -21,8 +21,9 @@\n })\r\n \r\n // Routes\r\n app.use('/api/auth', authRoutes)\r\n+app.use('/api/organizations', organizationRoutes)\r\n \r\n // Error handler — must be last\r\n app.use(errorHandler)\r\n \r\n"
+                },
+                {
+                    "date": 1777124654773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n \r\n import authRoutes from './modules/auth/auth.routes'\r\n import organizationRoutes from './modules/organizations/organizations.routes'\r\n import { errorHandler } from './middleware/errorHandler'\r\n+import userRoutes from './modules/users/users.routes'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n \r\n"
+                },
+                {
+                    "date": 1777124669062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n \r\n // Routes\r\n app.use('/api/auth', authRoutes)\r\n app.use('/api/organizations', organizationRoutes)\r\n+app.use('/api/users', userRoutes)\r\n \r\n // Error handler — must be last\r\n app.use(errorHandler)\r\n \r\n"
+                },
+                {
+                    "date": 1777125107459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n import authRoutes from './modules/auth/auth.routes'\r\n import organizationRoutes from './modules/organizations/organizations.routes'\r\n import { errorHandler } from './middleware/errorHandler'\r\n import userRoutes from './modules/users/users.routes'\r\n+import assetRoutes from './modules/assets/assets.routes'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n \r\n"
+                },
+                {
+                    "date": 1777125113481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n // Routes\r\n app.use('/api/auth', authRoutes)\r\n app.use('/api/organizations', organizationRoutes)\r\n app.use('/api/users', userRoutes)\r\n+app.use('/api/assets', assetRoutes)\r\n \r\n // Error handler — must be last\r\n app.use(errorHandler)\r\n \r\n"
+                },
+                {
+                    "date": 1777127411510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n import organizationRoutes from './modules/organizations/organizations.routes'\r\n import { errorHandler } from './middleware/errorHandler'\r\n import userRoutes from './modules/users/users.routes'\r\n import assetRoutes from './modules/assets/assets.routes'\r\n+import ticketRoutes from './modules/tickets/tickets.routes'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n \r\n"
+                },
+                {
+                    "date": 1777127426658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,9 @@\n app.use('/api/auth', authRoutes)\r\n app.use('/api/organizations', organizationRoutes)\r\n app.use('/api/users', userRoutes)\r\n app.use('/api/assets', assetRoutes)\r\n+app.use('/api/tickets', ticketRoutes)\r\n \r\n // Error handler — must be last\r\n app.use(errorHandler)\r\n \r\n"
+                },
+                {
+                    "date": 1777128609812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n import express from 'express'\r\n import cors from 'cors'\r\n import dotenv from 'dotenv'\r\n+import swaggerUi from 'swagger-ui-express'\r\n+import { swaggerSpec } from './lib/swagger'\r\n \r\n dotenv.config()\r\n \r\n import authRoutes from './modules/auth/auth.routes'\r\n"
+                },
+                {
+                    "date": 1777128617023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n import express from 'express'\r\n import cors from 'cors'\r\n import dotenv from 'dotenv'\r\n-import swaggerUi from 'swagger-ui-express'\r\n-import { swaggerSpec } from './lib/swagger'\r\n \r\n+\r\n dotenv.config()\r\n \r\n import authRoutes from './modules/auth/auth.routes'\r\n import organizationRoutes from './modules/organizations/organizations.routes'\r\n"
+                },
+                {
+                    "date": 1777128649793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,18 @@\n import express from 'express'\r\n import cors from 'cors'\r\n import dotenv from 'dotenv'\r\n \r\n-\r\n dotenv.config()\r\n \r\n import authRoutes from './modules/auth/auth.routes'\r\n import organizationRoutes from './modules/organizations/organizations.routes'\r\n import { errorHandler } from './middleware/errorHandler'\r\n import userRoutes from './modules/users/users.routes'\r\n import assetRoutes from './modules/assets/assets.routes'\r\n import ticketRoutes from './modules/tickets/tickets.routes'\r\n+import swaggerUi from 'swagger-ui-express'\r\n+import { swaggerSpec } from './lib/swagger'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n \r\n@@ -24,8 +25,10 @@\n   res.json({ status: 'ok', message: 'MedBed CRM API is running' })\r\n })\r\n \r\n // Routes\r\n+// API Documentation\r\n+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))\r\n app.use('/api/auth', authRoutes)\r\n app.use('/api/organizations', organizationRoutes)\r\n app.use('/api/users', userRoutes)\r\n app.use('/api/assets', assetRoutes)\r\n"
+                },
+                {
+                    "date": 1777129388715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n import assetRoutes from './modules/assets/assets.routes'\r\n import ticketRoutes from './modules/tickets/tickets.routes'\r\n import swaggerUi from 'swagger-ui-express'\r\n import { swaggerSpec } from './lib/swagger'\r\n+import analyticsRoutes from './modules/analytics/analytics.routes'\r\n \r\n const app = express()\r\n const PORT = process.env.PORT || 3000\r\n \r\n"
+                },
+                {
+                    "date": 1777129404770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n app.use('/api/organizations', organizationRoutes)\r\n app.use('/api/users', userRoutes)\r\n app.use('/api/assets', assetRoutes)\r\n app.use('/api/tickets', ticketRoutes)\r\n+app.use('/api/analytics', analyticsRoutes)\r\n \r\n // Error handler — must be last\r\n app.use(errorHandler)\r\n \r\n"
+                }
+            ],
+            "date": 1777119261820,
+            "name": "Commit-0",
+            "content": "import express from 'express'\r\nimport cors from 'cors'\r\nimport dotenv from 'dotenv'\r\n\r\ndotenv.config()\r\n\r\nimport authRoutes from './modules/auth/auth.routes'\r\nimport { errorHandler } from './middleware/errorHandler'\r\n\r\nconst app = express()\r\nconst PORT = process.env.PORT || 3000\r\n\r\n// Middleware\r\napp.use(cors())\r\napp.use(express.json())\r\n\r\n// Health check\r\napp.get('/health', (req, res) => {\r\n  res.json({ status: 'ok', message: 'MedBed CRM API is running' })\r\n})\r\n\r\n// Routes\r\napp.use('/api/auth', authRoutes)\r\n\r\n// Error handler — must be last\r\napp.use(errorHandler)\r\n\r\napp.listen(PORT, () => {\r\n  console.log(`Server running on http://localhost:${PORT}`)\r\n})"
+        }
+    ]
+}

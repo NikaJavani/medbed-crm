@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/modules/organizations/organizations.controller.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1777123774760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1777124193287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n   res: Response,\r\n   next: NextFunction\r\n ): Promise<void> => {\r\n   try {\r\n-    const org = await getOrganizationById(req.params.id)\r\n+    const org = await getOrganizationById(req.params.id as string)\r\n     res.json({ data: org })\r\n   } catch (err) {\r\n     next(err)\r\n   }\r\n"
+                },
+                {
+                    "date": 1777124211530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n       res.status(400).json({ errors: parsed.error.flatten().fieldErrors })\r\n       return\r\n     }\r\n \r\n-    const org = await updateOrganization(req.params.id, parsed.data)\r\n+    const org = await updateOrganization(req.params.id as string, parsed.data)\r\n     res.status(200).json({ message: 'Organization updated', data: org })\r\n   } catch (err) {\r\n     next(err)\r\n   }\r\n"
+                },
+                {
+                    "date": 1777124231907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n   res: Response,\r\n   next: NextFunction\r\n ): Promise<void> => {\r\n   try {\r\n-    await deactivateOrganization(req.params.id)\r\n+    await deactivateOrganization(req.params.id as string)\r\n     res.json({ message: 'Organization deactivated' })\r\n   } catch (err) {\r\n     next(err)\r\n   }\r\n"
+                }
+            ],
+            "date": 1777123774760,
+            "name": "Commit-0",
+            "content": "import { Response, NextFunction } from 'express'\r\nimport { AuthRequest } from '../../middleware/authenticate'\r\nimport {\r\n  getAllOrganizations,\r\n  getOrganizationById,\r\n  createOrganization,\r\n  updateOrganization,\r\n  deactivateOrganization,\r\n} from './organizations.service'\r\nimport {\r\n  createOrganizationSchema,\r\n  updateOrganizationSchema,\r\n} from './organizations.schema'\r\n\r\nexport const getAll = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const orgs = await getAllOrganizations()\r\n    res.json({ data: orgs })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const getById = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const org = await getOrganizationById(req.params.id)\r\n    res.json({ data: org })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const create = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const parsed = createOrganizationSchema.safeParse(req.body)\r\n    if (!parsed.success) {\r\n      res.status(400).json({ errors: parsed.error.flatten().fieldErrors })\r\n      return\r\n    }\r\n\r\n    const org = await createOrganization(parsed.data)\r\n    res.status(201).json({ message: 'Organization created', data: org })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const update = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const parsed = updateOrganizationSchema.safeParse(req.body)\r\n    if (!parsed.success) {\r\n      res.status(400).json({ errors: parsed.error.flatten().fieldErrors })\r\n      return\r\n    }\r\n\r\n    const org = await updateOrganization(req.params.id, parsed.data)\r\n    res.status(200).json({ message: 'Organization updated', data: org })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const deactivate = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    await deactivateOrganization(req.params.id)\r\n    res.json({ message: 'Organization deactivated' })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}"
+        }
+    ]
+}

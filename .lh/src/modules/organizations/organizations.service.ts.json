@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/organizations/organizations.service.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777123747302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777123747302,
+            "name": "Commit-0",
+            "content": "import { prisma } from '../../lib/prisma'\r\nimport { CreateOrganizationInput, UpdateOrganizationInput } from './organizations.schema'\r\n\r\nexport const getAllOrganizations = async () => {\r\n  return prisma.organization.findMany({\r\n    where: { isActive: true },\r\n    orderBy: { createdAt: 'desc' },\r\n    select: {\r\n      id: true,\r\n      name: true,\r\n      type: true,\r\n      city: true,\r\n      country: true,\r\n      contractTier: true,\r\n      contractExpiry: true,\r\n      isActive: true,\r\n      createdAt: true,\r\n      _count: {\r\n        select: {\r\n          users: true,\r\n          assets: true,\r\n          tickets: true,\r\n        },\r\n      },\r\n    },\r\n  })\r\n}\r\n\r\nexport const getOrganizationById = async (id: string) => {\r\n  const org = await prisma.organization.findUnique({\r\n    where: { id },\r\n    include: {\r\n      _count: {\r\n        select: {\r\n          users: true,\r\n          assets: true,\r\n          tickets: true,\r\n        },\r\n      },\r\n    },\r\n  })\r\n\r\n  if (!org) throw new Error('Organization not found')\r\n  return org\r\n}\r\n\r\nexport const createOrganization = async (data: CreateOrganizationInput) => {\r\n  return prisma.organization.create({\r\n    data: {\r\n      ...data,\r\n      contractExpiry: data.contractExpiry\r\n        ? new Date(data.contractExpiry)\r\n        : undefined,\r\n    },\r\n  })\r\n}\r\n\r\nexport const updateOrganization = async (\r\n  id: string,\r\n  data: UpdateOrganizationInput\r\n) => {\r\n  const existing = await prisma.organization.findUnique({ where: { id } })\r\n  if (!existing) throw new Error('Organization not found')\r\n\r\n  return prisma.organization.update({\r\n    where: { id },\r\n    data: {\r\n      ...data,\r\n      contractExpiry: data.contractExpiry\r\n        ? new Date(data.contractExpiry)\r\n        : undefined,\r\n    },\r\n  })\r\n}\r\n\r\nexport const deactivateOrganization = async (id: string) => {\r\n  const existing = await prisma.organization.findUnique({ where: { id } })\r\n  if (!existing) throw new Error('Organization not found')\r\n\r\n  return prisma.organization.update({\r\n    where: { id },\r\n    data: { isActive: false },\r\n  })\r\n}"
+        }
+    ]
+}

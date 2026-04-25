@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/modules/auth/auth.routes.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1777119244150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1777128522723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,75 @@\n import { register, login } from './auth.controller'\r\n \r\n const router = Router()\r\n \r\n+/**\r\n+ * @swagger\r\n+ * /api/auth/register:\r\n+ *   post:\r\n+ *     tags: [Auth]\r\n+ *     summary: Register a new user\r\n+ *     security: []\r\n+ *     requestBody:\r\n+ *       required: true\r\n+ *       content:\r\n+ *         application/json:\r\n+ *           schema:\r\n+ *             type: object\r\n+ *             required: [firstName, lastName, email, password, role, organizationId]\r\n+ *             properties:\r\n+ *               firstName:\r\n+ *                 type: string\r\n+ *                 example: Ahmad\r\n+ *               lastName:\r\n+ *                 type: string\r\n+ *                 example: Razali\r\n+ *               email:\r\n+ *                 type: string\r\n+ *                 example: ahmad@medbed.com\r\n+ *               password:\r\n+ *                 type: string\r\n+ *                 example: password123\r\n+ *               role:\r\n+ *                 type: string\r\n+ *                 enum: [hospital_staff, hospital_admin, technician, manager, vendor_admin]\r\n+ *               organizationId:\r\n+ *                 type: string\r\n+ *                 example: 00000000-0000-0000-0000-000000000001\r\n+ *     responses:\r\n+ *       201:\r\n+ *         description: User registered successfully\r\n+ *       400:\r\n+ *         description: Validation error or email already in use\r\n+ */\r\n router.post('/register', register)\r\n+\r\n+/**\r\n+ * @swagger\r\n+ * /api/auth/login:\r\n+ *   post:\r\n+ *     tags: [Auth]\r\n+ *     summary: Login and get JWT tokens\r\n+ *     security: []\r\n+ *     requestBody:\r\n+ *       required: true\r\n+ *       content:\r\n+ *         application/json:\r\n+ *           schema:\r\n+ *             type: object\r\n+ *             required: [email, password]\r\n+ *             properties:\r\n+ *               email:\r\n+ *                 type: string\r\n+ *                 example: admin@medbed.com\r\n+ *               password:\r\n+ *                 type: string\r\n+ *                 example: password123\r\n+ *     responses:\r\n+ *       200:\r\n+ *         description: Login successful — returns accessToken and refreshToken\r\n+ *       400:\r\n+ *         description: Invalid credentials\r\n+ */\r\n router.post('/login', login)\r\n \r\n export default router\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1777119244150,
+            "name": "Commit-0",
+            "content": "import { Router } from 'express'\r\nimport { register, login } from './auth.controller'\r\n\r\nconst router = Router()\r\n\r\nrouter.post('/register', register)\r\nrouter.post('/login', login)\r\n\r\nexport default router"
+        }
+    ]
+}

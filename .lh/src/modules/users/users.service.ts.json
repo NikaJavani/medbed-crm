@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/users/users.service.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777124586247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777124586247,
+            "name": "Commit-0",
+            "content": "import { prisma } from '../../lib/prisma'\r\nimport { UpdateUserInput } from './users.schema'\r\n\r\nexport const getAllUsers = async (organizationId?: string) => {\r\n  return prisma.user.findMany({\r\n    where: {\r\n      ...(organizationId ? { organizationId } : {}),\r\n      isActive: true,\r\n    },\r\n    orderBy: { createdAt: 'desc' },\r\n    select: {\r\n      id: true,\r\n      firstName: true,\r\n      lastName: true,\r\n      email: true,\r\n      role: true,\r\n      phone: true,\r\n      isActive: true,\r\n      lastLoginAt: true,\r\n      createdAt: true,\r\n      organization: {\r\n        select: {\r\n          id: true,\r\n          name: true,\r\n          type: true,\r\n        },\r\n      },\r\n    },\r\n  })\r\n}\r\n\r\nexport const getUserById = async (id: string) => {\r\n  const user = await prisma.user.findUnique({\r\n    where: { id },\r\n    select: {\r\n      id: true,\r\n      firstName: true,\r\n      lastName: true,\r\n      email: true,\r\n      role: true,\r\n      phone: true,\r\n      isActive: true,\r\n      lastLoginAt: true,\r\n      createdAt: true,\r\n      organization: {\r\n        select: {\r\n          id: true,\r\n          name: true,\r\n          type: true,\r\n        },\r\n      },\r\n    },\r\n  })\r\n\r\n  if (!user) throw new Error('User not found')\r\n  return user\r\n}\r\n\r\nexport const updateUser = async (id: string, data: UpdateUserInput) => {\r\n  const existing = await prisma.user.findUnique({ where: { id } })\r\n  if (!existing) throw new Error('User not found')\r\n\r\n  return prisma.user.update({\r\n    where: { id },\r\n    data,\r\n    select: {\r\n      id: true,\r\n      firstName: true,\r\n      lastName: true,\r\n      email: true,\r\n      role: true,\r\n      phone: true,\r\n      isActive: true,\r\n    },\r\n  })\r\n}\r\n\r\nexport const deactivateUser = async (id: string) => {\r\n  const existing = await prisma.user.findUnique({ where: { id } })\r\n  if (!existing) throw new Error('User not found')\r\n\r\n  return prisma.user.update({\r\n    where: { id },\r\n    data: { isActive: false },\r\n  })\r\n}\r\n\r\nexport const getTechnicians = async () => {\r\n  return prisma.user.findMany({\r\n    where: {\r\n      role: 'technician',\r\n      isActive: true,\r\n    },\r\n    select: {\r\n      id: true,\r\n      firstName: true,\r\n      lastName: true,\r\n      email: true,\r\n      phone: true,\r\n      organization: {\r\n        select: { id: true, name: true },\r\n      },\r\n    },\r\n  })\r\n}"
+        }
+    ]
+}

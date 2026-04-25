@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/modules/assets/assets.schema.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1777125038389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1777126807646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n export const createAssetModelSchema = z.object({\r\n   name: z.string().min(1, 'Name is required'),\r\n   manufacturer: z.string().min(1, 'Manufacturer is required'),\r\n   category: z.string().min(1, 'Category is required'),\r\n-  specifications: z.record(z.unknown()).optional(),\r\n+  specifications: z.record(z.string(), z.unknown()).optional(),\r\n   manualUrl: z.string().url().optional(),\r\n })\r\n \r\n export const createAssetSchema = z.object({\r\n"
+                },
+                {
+                    "date": 1777126837359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n     'decommissioned',\r\n     'pending_inspection',\r\n   ]).optional(),\r\n   warrantyExpiry: z.string().datetime().optional(),\r\n-  metadata: z.record(z.unknown()).optional(),\r\n+  metadata: z.record(z.string(), z.unknown()).optional(),\r\n })\r\n \r\n export type CreateAssetModelInput = z.infer<typeof createAssetModelSchema>\r\n export type CreateAssetInput = z.infer<typeof createAssetSchema>\r\n"
+                }
+            ],
+            "date": 1777125038389,
+            "name": "Commit-0",
+            "content": "import { z } from 'zod'\r\n\r\nexport const createAssetModelSchema = z.object({\r\n  name: z.string().min(1, 'Name is required'),\r\n  manufacturer: z.string().min(1, 'Manufacturer is required'),\r\n  category: z.string().min(1, 'Category is required'),\r\n  specifications: z.record(z.unknown()).optional(),\r\n  manualUrl: z.string().url().optional(),\r\n})\r\n\r\nexport const createAssetSchema = z.object({\r\n  organizationId: z.string().min(1, 'Organization ID is required'),\r\n  assetModelId: z.string().min(1, 'Asset model ID is required'),\r\n  serialNumber: z.string().min(1, 'Serial number is required'),\r\n  internalTag: z.string().optional(),\r\n  ward: z.string().optional(),\r\n  floor: z.string().optional(),\r\n  installationDate: z.string().datetime().optional(),\r\n  warrantyExpiry: z.string().datetime().optional(),\r\n})\r\n\r\nexport const updateAssetSchema = z.object({\r\n  internalTag: z.string().optional(),\r\n  ward: z.string().optional(),\r\n  floor: z.string().optional(),\r\n  status: z.enum([\r\n    'operational',\r\n    'under_maintenance',\r\n    'decommissioned',\r\n    'pending_inspection',\r\n  ]).optional(),\r\n  warrantyExpiry: z.string().datetime().optional(),\r\n  metadata: z.record(z.unknown()).optional(),\r\n})\r\n\r\nexport type CreateAssetModelInput = z.infer<typeof createAssetModelSchema>\r\nexport type CreateAssetInput = z.infer<typeof createAssetSchema>\r\nexport type UpdateAssetInput = z.infer<typeof updateAssetSchema>"
+        }
+    ]
+}

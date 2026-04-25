@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/analytics/analytics.routes.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777129371980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777129371980,
+            "name": "Commit-0",
+            "content": "import { Router } from 'express'\r\nimport {\r\n  ticketSummary,\r\n  ticketsByCategory,\r\n  ticketsByPriority,\r\n  assetHealth,\r\n  technicianPerformance,\r\n  organizationSummary,\r\n  recentActivity,\r\n} from './analytics.controller'\r\nimport { authenticate } from '../../middleware/authenticate'\r\nimport { authorize } from '../../middleware/authorize'\r\n\r\nconst router = Router()\r\n\r\nrouter.use(authenticate)\r\nrouter.use(authorize('vendor_admin', 'manager', 'hospital_admin'))\r\n\r\n/**\r\n * @swagger\r\n * /api/analytics/tickets/summary:\r\n *   get:\r\n *     tags: [Analytics]\r\n *     summary: Ticket counts by status + SLA compliance rate\r\n *     responses:\r\n *       200:\r\n *         description: Ticket summary statistics\r\n */\r\nrouter.get('/tickets/summary', ticketSummary)\r\n\r\n/**\r\n * @swagger\r\n * /api/analytics/tickets/by-category:\r\n *   get:\r\n *     tags: [Analytics]\r\n *     summary: Ticket counts grouped by category\r\n *     responses:\r\n *       200:\r\n *         description: Tickets by category\r\n */\r\nrouter.get('/tickets/by-category', ticketsByCategory)\r\n\r\n/**\r\n * @swagger\r\n * /api/analytics/tickets/by-priority:\r\n *   get:\r\n *     tags: [Analytics]\r\n *     summary: Ticket counts grouped by priority\r\n *     responses:\r\n *       200:\r\n *         description: Tickets by priority\r\n */\r\nrouter.get('/tickets/by-priority', ticketsByPriority)\r\n\r\n/**\r\n * @swagger\r\n * /api/analytics/assets/health:\r\n *   get:\r\n *     tags: [Analytics]\r\n *     summary: Asset health scores based on ticket frequency\r\n *     responses:\r\n *       200:\r\n *         description: Asset health report\r\n */\r\nrouter.get('/assets/health', assetHealth)\r\n\r\n/**\r\n * @swagger\r\n * /api/analytics/technicians/performance:\r\n *   get:\r\n *     tags: [Analytics]\r\n *     summary: Technician performance — tickets resolved, avg labor time\r\n *     responses:\r\n *       200:\r\n *         description: Technician performance stats\r\n */\r\nrouter.get('/technicians/performance', technicianPerformance)\r\n\r\n/**\r\n * @swagger\r\n * /api/analytics/organizations/summary:\r\n *   get:\r\n *     tags: [Analytics]\r\n *     summary: Per-hospital ticket and asset summary (vendor_admin only)\r\n *     responses:\r\n *       200:\r\n *         description: Organization summary\r\n */\r\nrouter.get(\r\n  '/organizations/summary',\r\n  authorize('vendor_admin', 'manager'),\r\n  organizationSummary\r\n)\r\n\r\n/**\r\n * @swagger\r\n * /api/analytics/activity:\r\n *   get:\r\n *     tags: [Analytics]\r\n *     summary: Recent tickets and status changes\r\n *     responses:\r\n *       200:\r\n *         description: Recent activity feed\r\n */\r\nrouter.get('/activity', recentActivity)\r\n\r\nexport default router"
+        }
+    ]
+}

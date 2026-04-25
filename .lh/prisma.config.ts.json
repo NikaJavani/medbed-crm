@@ -1,0 +1,30 @@
+{
+    "sourceFile": "prisma.config.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1777109875834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1777113273045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import path from 'path'\n import { defineConfig } from 'prisma/config'\n \n export default defineConfig({\n-  earlyAccess: true,\n   schema: path.join('prisma', 'schema.prisma'),\n   migrate: {\n     adapter: async () => {\n       const { PrismaPg } = await import('@prisma/adapter-pg')\n"
+                },
+                {
+                    "date": 1777114779120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import path from 'path'\n import { defineConfig } from 'prisma/config'\n \n export default defineConfig({\n+  earlyAccess: true,\n   schema: path.join('prisma', 'schema.prisma'),\n   migrate: {\n     adapter: async () => {\n       const { PrismaPg } = await import('@prisma/adapter-pg')\n"
+                },
+                {
+                    "date": 1777114791674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import path from 'path'\n import { defineConfig } from 'prisma/config'\n \n export default defineConfig({\n-  earlyAccess: true,\n   schema: path.join('prisma', 'schema.prisma'),\n   migrate: {\n     adapter: async () => {\n       const { PrismaPg } = await import('@prisma/adapter-pg')\n"
+                }
+            ],
+            "date": 1777109875834,
+            "name": "Commit-0",
+            "content": "import path from 'path'\nimport { defineConfig } from 'prisma/config'\n\nexport default defineConfig({\n  earlyAccess: true,\n  schema: path.join('prisma', 'schema.prisma'),\n  migrate: {\n    adapter: async () => {\n      const { PrismaPg } = await import('@prisma/adapter-pg')\n      const { default: pg } = await import('pg')\n      const connectionString = process.env.DATABASE_URL!\n      const pool = new pg.Pool({ connectionString })\n      return new PrismaPg(pool)\n    },\n  },\n})"
+        }
+    ]
+}

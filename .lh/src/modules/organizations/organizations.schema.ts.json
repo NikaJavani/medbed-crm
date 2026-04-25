@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/organizations/organizations.schema.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777123729178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777123729178,
+            "name": "Commit-0",
+            "content": "import { z } from 'zod'\r\n\r\nexport const createOrganizationSchema = z.object({\r\n  name: z.string().min(1, 'Name is required'),\r\n  type: z.enum(['hospital', 'vendor']),\r\n  address: z.string().optional(),\r\n  city: z.string().optional(),\r\n  country: z.string().optional(),\r\n  contractTier: z.enum(['basic', 'premium', 'enterprise']).default('basic'),\r\n  contractExpiry: z.string().datetime().optional(),\r\n})\r\n\r\nexport const updateOrganizationSchema = createOrganizationSchema.partial()\r\n\r\nexport type CreateOrganizationInput = z.infer<typeof createOrganizationSchema>\r\nexport type UpdateOrganizationInput = z.infer<typeof updateOrganizationSchema>"
+        }
+    ]
+}

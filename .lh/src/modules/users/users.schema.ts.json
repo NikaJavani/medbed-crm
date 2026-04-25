@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/users/users.schema.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777124557774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777124557774,
+            "name": "Commit-0",
+            "content": "import { z } from 'zod'\r\n\r\nexport const updateUserSchema = z.object({\r\n  firstName: z.string().min(1).optional(),\r\n  lastName: z.string().min(1).optional(),\r\n  phone: z.string().optional(),\r\n  role: z.enum([\r\n    'hospital_staff',\r\n    'hospital_admin',\r\n    'technician',\r\n    'manager',\r\n    'vendor_admin',\r\n  ]).optional(),\r\n  isActive: z.boolean().optional(),\r\n})\r\n\r\nexport type UpdateUserInput = z.infer<typeof updateUserSchema>"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/analytics/analytics.controller.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777129350799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777129350799,
+            "name": "Commit-0",
+            "content": "import { Response, NextFunction } from 'express'\r\nimport { AuthRequest } from '../../middleware/authenticate'\r\nimport {\r\n  getTicketSummary,\r\n  getTicketsByCategory,\r\n  getTicketsByPriority,\r\n  getAssetHealth,\r\n  getTechnicianPerformance,\r\n  getOrganizationSummary,\r\n  getRecentActivity,\r\n} from './analytics.service'\r\n\r\nconst getOrgFilter = (req: AuthRequest) => {\r\n  const isVendorSide =\r\n    req.user?.role === 'vendor_admin' || req.user?.role === 'manager'\r\n  return isVendorSide\r\n    ? (req.query.organizationId as string | undefined)\r\n    : req.user?.organizationId\r\n}\r\n\r\nexport const ticketSummary = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const data = await getTicketSummary(getOrgFilter(req))\r\n    res.json({ data })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const ticketsByCategory = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const data = await getTicketsByCategory(getOrgFilter(req))\r\n    res.json({ data })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const ticketsByPriority = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const data = await getTicketsByPriority(getOrgFilter(req))\r\n    res.json({ data })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const assetHealth = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const data = await getAssetHealth(getOrgFilter(req))\r\n    res.json({ data })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const technicianPerformance = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const data = await getTechnicianPerformance()\r\n    res.json({ data })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const organizationSummary = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const data = await getOrganizationSummary()\r\n    res.json({ data })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}\r\n\r\nexport const recentActivity = async (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): Promise<void> => {\r\n  try {\r\n    const data = await getRecentActivity(getOrgFilter(req))\r\n    res.json({ data })\r\n  } catch (err) {\r\n    next(err)\r\n  }\r\n}"
+        }
+    ]
+}

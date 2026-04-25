@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/middleware/authenticate.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777119083647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777119083647,
+            "name": "Commit-0",
+            "content": "import { Request, Response, NextFunction } from 'express'\r\nimport { verifyAccessToken, TokenPayload } from '../lib/jwt'\r\n\r\nexport interface AuthRequest extends Request {\r\n  user?: TokenPayload\r\n}\r\n\r\nexport const authenticate = (\r\n  req: AuthRequest,\r\n  res: Response,\r\n  next: NextFunction\r\n): void => {\r\n  const authHeader = req.headers.authorization\r\n\r\n  if (!authHeader || !authHeader.startsWith('Bearer ')) {\r\n    res.status(401).json({ message: 'No token provided' })\r\n    return\r\n  }\r\n\r\n  const token = authHeader.split(' ')[1]\r\n\r\n  try {\r\n    const payload = verifyAccessToken(token)\r\n    req.user = payload\r\n    next()\r\n  } catch {\r\n    res.status(401).json({ message: 'Invalid or expired token' })\r\n  }\r\n}"
+        }
+    ]
+}

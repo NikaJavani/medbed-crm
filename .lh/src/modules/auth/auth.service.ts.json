@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/modules/auth/auth.service.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1777119204515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1777119204515,
+            "name": "Commit-0",
+            "content": "import bcrypt from 'bcryptjs'\r\nimport { prisma } from '../../lib/prisma'\r\nimport { generateAccessToken, generateRefreshToken } from '../../lib/jwt'\r\nimport { RegisterInput, LoginInput } from './auth.schema'\r\n\r\nexport const registerUser = async (data: RegisterInput) => {\r\n  const existing = await prisma.user.findUnique({\r\n    where: { email: data.email },\r\n  })\r\n\r\n  if (existing) {\r\n    throw new Error('Email already in use')\r\n  }\r\n\r\n  const passwordHash = await bcrypt.hash(data.password, 12)\r\n\r\n  const user = await prisma.user.create({\r\n    data: {\r\n      firstName: data.firstName,\r\n      lastName: data.lastName,\r\n      email: data.email,\r\n      passwordHash,\r\n      phone: data.phone,\r\n      organizationId: data.organizationId,\r\n      role: data.role,\r\n    },\r\n    select: {\r\n      id: true,\r\n      firstName: true,\r\n      lastName: true,\r\n      email: true,\r\n      role: true,\r\n      organizationId: true,\r\n    },\r\n  })\r\n\r\n  return user\r\n}\r\n\r\nexport const loginUser = async (data: LoginInput) => {\r\n  const user = await prisma.user.findUnique({\r\n    where: { email: data.email },\r\n  })\r\n\r\n  if (!user || !user.isActive) {\r\n    throw new Error('Invalid credentials')\r\n  }\r\n\r\n  const passwordMatch = await bcrypt.compare(data.password, user.passwordHash)\r\n\r\n  if (!passwordMatch) {\r\n    throw new Error('Invalid credentials')\r\n  }\r\n\r\n  await prisma.user.update({\r\n    where: { id: user.id },\r\n    data: { lastLoginAt: new Date() },\r\n  })\r\n\r\n  const payload = {\r\n    userId: user.id,\r\n    role: user.role,\r\n    organizationId: user.organizationId,\r\n  }\r\n\r\n  const accessToken = generateAccessToken(payload)\r\n  const refreshToken = generateRefreshToken(payload)\r\n\r\n  return {\r\n    accessToken,\r\n    refreshToken,\r\n    user: {\r\n      id: user.id,\r\n      firstName: user.firstName,\r\n      lastName: user.lastName,\r\n      email: user.email,\r\n      role: user.role,\r\n    },\r\n  }\r\n}"
+        }
+    ]
+}
