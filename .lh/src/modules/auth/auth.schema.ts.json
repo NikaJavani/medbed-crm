@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1777119183372,
@@ -16,6 +16,10 @@
                 {
                     "date": 1777123473393,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   lastName: z.string().min(1, 'Last name is required'),\r\n   email: z.string().email('Invalid email'),\r\n   password: z.string().min(8, 'Password must be at least 8 characters'),\r\n   phone: z.string().optional(),\r\n-  organizationId: z.string().uuid('Invalid organization ID'),\r\n+  organizationId: z.string().min(1, 'Organization ID is required'),\r\n   role: z.enum([\r\n     'hospital_staff',\r\n     'hospital_admin',\r\n     'technician',\r\n"
+                },
+                {
+                    "date": 1777704004829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,14 +7,15 @@\n   password: z.string().min(8, 'Password must be at least 8 characters'),\r\n   phone: z.string().optional(),\r\n   organizationId: z.string().min(1, 'Organization ID is required'),\r\n   role: z.enum([\r\n-    'hospital_staff',\r\n-    'hospital_admin',\r\n-    'technician',\r\n-    'manager',\r\n-    'vendor_admin',\r\n-  ]),\r\n+      'hospital_staff',\r\n+      'hospital_admin',\r\n+      'client',\r\n+      'technician',\r\n+      'manager',\r\n+      'vendor_admin',\r\n+    ]),\r\n })\r\n \r\n export const loginSchema = z.object({\r\n   email: z.string().email('Invalid email'),\r\n"
                 }
             ],
             "date": 1777119183372,

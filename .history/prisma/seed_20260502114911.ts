@@ -38,7 +38,7 @@ async function main() {
   console.log('✓ Organization created')
 
   // ── Users ──────────────────────────────────────────────
-  const password = await bcrypt.hash('GoPiyaTech9*', 12)
+  const password = await bcrypt.hash('Kj6596kj6596*', 12)
 
   await prisma.user.create({
     data: {
